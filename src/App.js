@@ -1,23 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import TodoGroup from './components/TodoGroup'
+import styled from 'styled-components'
+import DecayCard from './components/DecayCard'
+const AppWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+`;
 
+const DecaySection = styled.div`
+  display: flex;
+  justify-content: center;
+`;
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <AppWrapper>
+            <TodoGroup />
+            <DecaySection>
+                <DecayCard dueDate={'TODAY'}></DecayCard>
+                <DecayCard dueDate={'SAT'}></DecayCard>
+            </DecaySection>
+        </AppWrapper>
     </div>
   );
 }
