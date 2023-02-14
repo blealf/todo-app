@@ -7,8 +7,8 @@ const DecayCardWrapper = styled.div`
   -webkit-box-shadow: 5px 10px 57px 0px rgba(196,192,192,0.75);
   -moz-box-shadow: 5px 10px 57px 0px rgba(196,192,192,0.75);
   padding: 10px;
-  max-width: 150px;
-  margin: 0 5px auto 5px;
+  max-width: 49%;
+  margin: 0 1% auto 1%;
   display: flex;
   flex-direction: column;
 `;
