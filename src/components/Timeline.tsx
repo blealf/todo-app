@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import dayjs from 'dayjs'
 
@@ -31,30 +31,53 @@ const CurrentTime = styled.div`
   width: 100%;
   background: lightblue;
   display: block;
+  position: absolute;
+
+  &::before {
+    content: '';
+    position: absolute;
+    height: 7px;
+    width: 7px;
+    border-radius: 50%;
+    background: #3165D5;
+    top: -2px;
+    left: -1px;
+    tranform: translate(50%)
+  }
 `;
 
 const Timeline = () => {
-    const [time, setTime] = useState([...Array(24).keys()])
-    const currentTime = dayjs().format()
-    console.log(currentTime)
+    const time = [...Array(24).keys()]
+    const [currentTime, setCurrentTime] = useState(dayjs())
 
     const AmOrPm = (value: number) => {
-        return value < 12 ? 'am' : value === 12 ? `noon` : 'pm'
+        return value < 12
+            ? value + ' am'
+            : value === 12
+                ? value + ` noon`
+                : (value - 12) + ' pm'
     }
 
-    const activeTime = () => {
-        return
-    }
+    useEffect(() => {
+        document.getElementById('currentPoint')?.scrollIntoView()
+        setInterval(() => {
+            setCurrentTime(dayjs())
+        }, 10000)
+    })
 
     return (
         <TimelineWrapper>
             {time.map(t => {
                 return (
                     <Timeslot key={t}>
-                        <TimeNumber>{t + ' ' + AmOrPm(t)}</TimeNumber>
-                        <div style={{width: '80%'}}>
+                        <TimeNumber>{AmOrPm(t)}</TimeNumber>
+                        <div id="timeContainer" style={{width: '80%', position: 'relative'}}>
                             <Divider></Divider>
-                            <CurrentTime></CurrentTime>
+                            { currentTime.format('H') === t.toString() ?
+                                <CurrentTime id="currentPoint" style={{
+                                    top: Math.floor(Number(currentTime.format('m'))/60 * 50) + 'px'
+                                }}></CurrentTime> : ''
+                            }
                         </div>
                     </Timeslot>
                 )

@@ -5,7 +5,7 @@ type ProgressBarProps = {
    value: number
     color: string
 }
-const Progressbar  = ({ value = 30, color }: ProgressBarProps) => {
+const ProgressBar  = ({ value = 30, color }: ProgressBarProps) => {
     return (
         <CircularProgressbar strokeWidth={50} styles={
             buildStyles(
@@ -18,4 +18,4 @@ const Progressbar  = ({ value = 30, color }: ProgressBarProps) => {
     )
 }
 
-export default Progressbar
+export default ProgressBar

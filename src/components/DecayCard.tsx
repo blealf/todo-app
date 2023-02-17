@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import Progressbar from './Progress'
+import ProgressBar from './ProgressBar'
 
 const DecayCardWrapper = styled.div`
   border-radius: 12px;
@@ -17,7 +17,7 @@ const CircularTimer = styled.div`
   height: 30px;
   width: 30px;
   border-radius: 50%;
-  border: 1px solid ${props => props.color || 'lightblue'};
+  border: 2px solid ${props => props.color || 'lightblue'};
   padding: 2px;
   color: teal;
 `;
@@ -38,8 +38,8 @@ const DecayTitle = styled.p`
 const DueDate = styled.div`
   padding: 8px 10px;
   border-radius: 15px 30px;
-  color: ${props => props.color || 'blue'};
-  background: lightblue;
+  color: lightblue;
+  background: ${props => props.color || 'blue'};
   margin-right: auto;
   font-size: 0.7rem;
 `;
@@ -56,7 +56,7 @@ const DecayCard = (props: DecayCardProps) => {
     return (
         <DecayCardWrapper>
             <CircularTimer color={props.color}>
-                <Progressbar value={30} color={props.color} />
+                <ProgressBar value={30} color={props.color} />
             </CircularTimer>
             <GroupTitle>{props.group || 'General'}</GroupTitle>
             <DecayTitle>{props.title || "Amanda at Ruth's"}</DecayTitle>

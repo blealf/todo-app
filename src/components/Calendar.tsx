@@ -1,6 +1,7 @@
-import styled from 'styled-components'
-import Timeline from './Timeline'
 import {useState} from "react";
+import styled from 'styled-components'
+import dayjs from 'dayjs'
+import Timeline from './Timeline'
 
 const CalenderWrapper = styled.div`
   padding: 10px;
@@ -9,16 +10,28 @@ const CalenderWrapper = styled.div`
   border-radius: 10px;
 `
 
-const Days = styled.button`
-  padding: 3px 15px;
-  border-radius: 12px;
+const Days = styled.button<{active: boolean}>`
+  width: 60px;
+  height: 60px;
+  padding: 0 10px 0 10px;
+  border-radius: 15px;
   border: none;
   cursor: pointer;
-  background: #F0F1F4;
   margin-right: 15px;
+  background: ${props => props.active ? '#2F67DC' : '#F0F0F3'};
+  color: ${props => props.active ? '#fff' : '#000'};
   &:hover {
     background: #2F67DC;
+    color: #fff;
     opacity: 0.8;
+  }
+  h3, p {
+    margin: 6px 2px 6px 2px;
+    text-align: center;
+  }
+  p {
+    opacity: 0.7;
+    font-size: 12px;
   }
 `;
 
@@ -37,17 +50,17 @@ type CalenderProps = {
 }
 
 const Calendar = ({ active }: CalenderProps ) => {
-    const [days, setDay] = useState([...Array(31).keys()].map(val => val + 1))
-
+    const [days, setDay] = useState([...Array(31).keys()].map(val => val - 1))
+    const currentDate = dayjs()
     return (
         <CalenderWrapper>
             <DaysWrapper>
                 <DaysRail>
                     {days.map(d => {
                         return (
-                            <Days>
-                                <h3>{d}</h3>
-                                <p>Wed</p>
+                            <Days key={d} active={d === 0}>
+                                <h3>{currentDate.add(d, 'day').format('D')}</h3>
+                                <p>{currentDate.add(d, 'day').format('ddd')}</p>
                             </Days>
                         )
                     })}

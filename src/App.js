@@ -23,7 +23,7 @@ function App() {
             <TodoGroup />
             <DecaySection>
                 <DecayCard dueDate={'TODAY'}></DecayCard>
-                <DecayCard dueDate={'SAT'}></DecayCard>
+                <DecayCard dueDate={'SAT'} color={'pink'}></DecayCard>
             </DecaySection>
             <div>
                 <Calendar />
